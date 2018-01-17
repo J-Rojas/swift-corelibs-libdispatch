@@ -23,6 +23,13 @@ include(CheckSymbolExists)
 include(GNUInstallDirs)
 include(SwiftSupport)
 
+#set(CMAKE_SWIFT_FLAGS "")
+#option(CMAKE_SWIFT_FLAGS "Swift Compile flags" "")
+
+#set(CMAKE_SYSTEM_NAME Android)
+#set(CMAKE_SYSTEM_PROCESSOR armv7l)
+#MESSAGE(STATUS "SYSTEM_HOST_ARCH: ", ${SWIFT_HOST_ARCH})
+
 set(INSTALL_LIBDIR "lib" CACHE PATH "Path where the libraries should be installed")
 set(WITH_BLOCKS_RUNTIME "" CACHE PATH "Path to blocks runtime")
 
@@ -44,10 +51,14 @@ if(ENABLE_SWIFT)
   get_filename_component(SWIFT_TOOLCHAIN ${CMAKE_SWIFT_COMPILER} DIRECTORY)
   get_filename_component(SWIFT_TOOLCHAIN ${SWIFT_TOOLCHAIN} DIRECTORY)
 
+  #MESSAGE(STATUS "SYSTEM_HOST_ARCH: ", ${SWIFT_HOST_ARCH})
+
   string(TOLOWER ${CMAKE_SYSTEM_NAME} SWIFT_OS)
   get_swift_host_arch(SWIFT_HOST_ARCH)
 
-  set(SWIFT_RUNTIME_LIBDIR ${SWIFT_TOOLCHAIN}/lib/swift/${SWIFT_OS}/${SWIFT_HOST_ARCH})
+  #MESSAGE(STATUS "SYSTEM_HOST_ARCH: ", ${SWIFT_HOST_ARCH})
+
+  set(SWIFT_RUNTIME_LIBDIR ${SWIFT_TOOLCHAIN}/lib/swift/${SWIFT_OS}/)
 
   add_library(swiftCore
               SHARED IMPORTED GLOBAL)
@@ -74,6 +85,12 @@ if(NOT ENABLE_SWIFT)
   set(INSTALL_DISPATCH_HEADERS_DIR "include/dispatch" CACHE PATH "Path where the headers will be installed")
   set(INSTALL_BLOCK_HEADERS_DIR "include" CACHE PATH "Path where the headers will be installed for the blocks runtime")
   set(INSTALL_OS_HEADERS_DIR "include/os" CACHE PATH "Path where the headers will be installed")
+endif()
+
+if(CMAKE_SYSTEM_NAME STREQUAL Android)
+  set(ENABLE_DTRACE_DEFAULT OFF)
+else()
+  set(ENABLE_DTRACE_DEFAULT ON)
 endif()
 
 option(ENABLE_DTRACE "enable dtrace support" "")

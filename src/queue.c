@@ -936,7 +936,7 @@ static void (*_dispatch_thread_detach_callback)(void);
 void
 _dispatch_install_thread_detach_callback(dispatch_function_t cb)
 {
-    if (os_atomic_xchg(&_dispatch_thread_detach_callback, cb, relaxed)) {
+    if (os_atomic_xchg(&_dispatch_thread_detach_callback, (void(*)(void)) cb, relaxed)) {
         DISPATCH_CLIENT_CRASH(0, "Installing a thread detach callback twice");
     }
 }
