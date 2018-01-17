@@ -100,6 +100,7 @@ if(ENABLE_SWIFT)
                       -fmodule-map-file=${CMAKE_SOURCE_DIR}/dispatch/module.modulemap
                     SWIFT_FLAGS
                       -I ${CMAKE_SOURCE_DIR}
+                      ${CMAKE_SWIFT_FLAGS}
                       ${swift_optimization_flags}
                     DEPENDS
                       ${CMAKE_SOURCE_DIR}/dispatch/module.modulemap)
@@ -203,6 +204,10 @@ endif()
 add_custom_command(TARGET dispatch POST_BUILD
                    COMMAND cmake -E make_directory .libs
                    COMMAND cmake -E copy $<TARGET_FILE:dispatch> .libs
+                   COMMENT "Copying libdispatch to .libs")
+
+add_custom_command(TARGET dispatch POST_BUILD
+                   COMMAND cmake -E copy $<TARGET_FILE:dispatch> CMakeFiles/CMakeRelink.dir
                    COMMENT "Copying libdispatch to .libs")
 
 install(TARGETS

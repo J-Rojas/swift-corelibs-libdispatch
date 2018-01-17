@@ -13,7 +13,7 @@ function(add_swift_library library)
   list(APPEND flags -emit-library)
 
   if(ASL_TARGET)
-    list(APPEND FLAGS -target;${ASL_TARGET})
+    list(APPEND flags -target;${ASL_TARGET})
   endif()
   if(ASL_MODULE_NAME)
     list(APPEND flags -module-name;${ASL_MODULE_NAME})
