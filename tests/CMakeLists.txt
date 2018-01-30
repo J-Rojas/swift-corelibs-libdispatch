@@ -48,6 +48,20 @@ if(ENABLE_SWIFT)
                           swiftCore
                           swiftSwiftOnoneSupport)
 endif()
+if(CMAKE_SYSTEM_NAME STREQUAL Android)
+   target_link_libraries(bsdtestharness
+                        PRIVATE
+                          -Wl,-pie
+                          -Wl,--unresolved-symbols,report-all
+                          gcc
+                          stdc++
+                          m
+                          icudata
+                          icui18n
+                          icuuc
+                          icudata
+                          )
+endif()
 
 function(add_unit_test name)
   set(options DISABLED_TEST;NO_BSD_OVERLAY)
@@ -98,6 +112,20 @@ function(add_unit_test name)
                           PRIVATE
                             swiftCore
                             swiftSwiftOnoneSupport)
+  endif()
+  if(CMAKE_SYSTEM_NAME STREQUAL Android)
+   target_link_libraries(${name}
+                        PRIVATE
+                          -Wl,-pie
+                          -Wl,--unresolved-symbols,report-all
+                          gcc
+                          m
+                          stdc++
+                          icudata
+                          icui18n
+                          icuuc
+                          icudata
+                          )
   endif()
   target_link_libraries(${name} PRIVATE bsdtests)
   add_test(NAME ${name}

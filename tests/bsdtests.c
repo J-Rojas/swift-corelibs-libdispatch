@@ -37,6 +37,7 @@
 #include <spawn.h>
 #include <inttypes.h>
 #include "bsdtests.h"
+#include "dispatch_test.h"
 
 static int _test_exit_code;
 

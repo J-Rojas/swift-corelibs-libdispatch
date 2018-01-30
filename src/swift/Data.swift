@@ -11,6 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 import CDispatch
+import SwiftGlibc
 
 public struct DispatchData : RandomAccessCollection {
 	public typealias Iterator = DispatchDataIterator
