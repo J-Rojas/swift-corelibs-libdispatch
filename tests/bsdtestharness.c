@@ -36,6 +36,7 @@
 #endif
 
 #include <bsdtests.h>
+#include "dispatch_test.h"
 
 extern char **environ;
 
