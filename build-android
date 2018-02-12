@@ -70,7 +70,7 @@ if [ ! -f libdispatch.so ]; then
                     -DCMAKE_SYSTEM_PROCESSOR=armv7l \
                     -DENABLE_SWIFT=1 \
                     -DENABLE_TESTING=1 \
-                    -DDISPATCH_ENABLE_ASSERTS=1 \
+                    -DDISPATCH_ENABLE_ASSERTS=0 \
                     -DCMAKE_REQUIRED_INCLUDES="$ANDROID_ICU_PATH/armeabi-v7a/include ${SDKROOT}/lib/swift $ANDROID_STANDALONE_SYSROOT/usr/include" \
                     $SWIFT_PATH/swift-corelibs-libdispatch
 
