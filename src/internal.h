@@ -379,7 +379,7 @@ DISPATCH_EXPORT DISPATCH_NOTHROW void dispatch_atfork_child(void);
 #define QUEUE_MACRO_DEBUG 1
 #else
 #undef TRASHIT
-#define TRASHIT(x) do {(x) = (void *)-1;} while (0)
+#define TRASHIT(x) do {(x) = (void *)NULL;} while (0)
 #endif
 #else
 #define TRASHIT(x)

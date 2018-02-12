@@ -19,6 +19,7 @@ add_library(dispatch
               time.c
               transform.c
               voucher.c
+              shims.c
               protocol.defs
               provider.d
               allocator_internal.h
@@ -46,8 +47,8 @@ add_library(dispatch
               shims/atomic_sfb.h
               shims/getprogname.h
               shims/hw_config.h
-              shims/linux_stubs.c
-              shims/linux_stubs.h
+              shims/generic_unix_stubs.c
+              shims/generic_unix_stubs.h
               shims/lock.c
               shims/lock.h
               shims/perfmon.h
@@ -100,7 +101,6 @@ if(ENABLE_SWIFT)
                       -fmodule-map-file=${CMAKE_SOURCE_DIR}/dispatch/module.modulemap
                     SWIFT_FLAGS
                       -I ${CMAKE_SOURCE_DIR}
-                      ${CMAKE_SWIFT_FLAGS}
                       ${swift_optimization_flags}
                     DEPENDS
                       ${CMAKE_SOURCE_DIR}/dispatch/module.modulemap)
@@ -213,12 +213,12 @@ add_custom_command(TARGET dispatch POST_BUILD
 install(TARGETS
           dispatch
         DESTINATION
-          "${INSTALL_LIBDIR}/swift/${SWIFT_OS}")
+          "${INSTALL_TARGET_DIR}")
 if(ENABLE_SWIFT)
   install(FILES
             ${CMAKE_CURRENT_BINARY_DIR}/swift/Dispatch.swiftmodule
             ${CMAKE_CURRENT_BINARY_DIR}/swift/Dispatch.swiftdoc
           DESTINATION
-            "${INSTALL_LIBDIR}/swift/${SWIFT_OS}/${CMAKE_SYSTEM_PROCESSOR}")
+            "${INSTALL_TARGET_DIR}/${CMAKE_SYSTEM_PROCESSOR}")
 endif()
 
