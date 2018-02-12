@@ -48,15 +48,6 @@ if [ ! -f libdispatch.so ]; then
     pushd $ANDROID_STANDALONE_SYSROOT
         pushd $SWIFT_PATH
             pushd $SWIFT_ANDROID_BUILD_PATH/libdispatch-android-linux-armv7
-                # Libfoundation script is not completely prepared to handle cross compilation yet.
-                # ln -sf $SWIFT_ANDROID_BUILD_PATH/swift-linux-x86_64/lib/swift $ANDROID_STANDALONE_SYSROOT/usr/lib/
-                # cp $SWIFT_ANDROID_BUILD_PATH/swift-linux-x86_64/lib/swift/android/armv7/* $SWIFT_ANDROID_BUILD_PATH/swift-linux-x86_64/lib/swift/android/
-
-                # SWIFTCFLAGS="-DDEPLOYMENT_TARGET_ANDROID -DDEPLOYMENT_ENABLE_LIBDISPATCH -I$ANDROID_NDK_PATH/platforms/android-21/arch-arm/usr/include" \
-                # LDFLAGS="-fuse-ld=gold --sysroot=$ANDROID_NDK_PATH/platforms/android-21/arch-arm -L$ANDROID_NDK_PATH/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x -L$ANDROID_ICU_PATH/armeabi-v7a -L$ANDROID_STANDALONE_SYSROOT/usr/lib -ldispatch " \
-
-                #cmake .
-
                 cmake \
                     -G Ninja \
                     -DINSTALL_LIBDIR="$SWIFT_ANDROID_TOOLCHAIN_PATH/usr/lib" \

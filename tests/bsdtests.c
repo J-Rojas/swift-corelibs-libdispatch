@@ -469,6 +469,7 @@ static char** get_environment(void)
 void
 test_leaks_pid(const char *name, pid_t pid)
 {
+#ifdef __APPLE__
 	int res;
 	char pidstr[10];
 
@@ -509,6 +510,10 @@ test_leaks_pid(const char *name, pid_t pid)
 	} else {
 		perror(args[0]);
 	}
+#else
+	(void) name;
+	(void) pid;
+#endif
 }
 
 void
