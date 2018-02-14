@@ -52,3 +52,28 @@ mach_timebase_info(mach_timebase_info_t tbi)
 	tbi->denom = 1;
 	return 0;
 }
+
+/*
+ * Android declares but does not implement posix_spawnp().
+ */
+#ifdef __ANDROID__
+#include <spawn.h>
+static inline int posix_spawnp(pid_t* __pid, const char* __file, 
+                const posix_spawn_file_actions_t* __actions __attribute__((unused)), const posix_spawnattr_t* __attr __attribute__((unused)), 
+                char* const __argv[], char* const __env[]){
+    pid_t pid = fork();
+    if (__pid != NULL) {
+        *__pid = pid;
+    }
+    return execve(__file, __argv, __env);
+}
+
+static inline int posix_spawnattr_init(posix_spawnattr_t* __attr __attribute__((unused))) {
+	return 0;
+}
+
+static inline int posix_spawnattr_setflags(posix_spawnattr_t* __attr __attribute__((unused)), short __flags __attribute__((unused))) {
+	return 0;
+}
+
+#endif

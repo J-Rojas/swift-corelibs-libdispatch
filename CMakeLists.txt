@@ -76,6 +76,12 @@ if(NOT ENABLE_SWIFT)
   set(INSTALL_OS_HEADERS_DIR "include/os" CACHE PATH "Path where the headers will be installed")
 endif()
 
+if(CMAKE_SYSTEM_NAME STREQUAL Android)
+  set(ENABLE_DTRACE_DEFAULT OFF)
+else()
+  set(ENABLE_DTRACE_DEFAULT ON)
+endif()
+
 option(ENABLE_DTRACE "enable dtrace support" "")
 
 option(BUILD_SHARED_LIBS "build shared libraries" ON)
