@@ -206,10 +206,6 @@ add_custom_command(TARGET dispatch POST_BUILD
                    COMMAND cmake -E copy $<TARGET_FILE:dispatch> .libs
                    COMMENT "Copying libdispatch to .libs")
 
-add_custom_command(TARGET dispatch POST_BUILD
-                   COMMAND cmake -E copy $<TARGET_FILE:dispatch> CMakeFiles/CMakeRelink.dir
-                   COMMENT "Copying libdispatch to .libs")
-
 install(TARGETS
           dispatch
         DESTINATION

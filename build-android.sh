@@ -51,7 +51,7 @@ if [ ! -f libdispatch.so ]; then
                 cmake \
                     -G Ninja \
                     -DINSTALL_LIBDIR="$SWIFT_ANDROID_TOOLCHAIN_PATH/usr/lib" \
-                    -DCMAKE_SWIFT_COMPILER="$SWIFT_ANDROID_TOOLCHAIN_PATH/usr/bin/swiftc" \
+                    -DCMAKE_SWIFT_COMPILER="$SWIFT_ANDROID_BUILD_PATH/swift-linux-x86_64/bin/swiftc" \
                     -DCMAKE_C_COMPILER="$CC" \
                     -DCMAKE_C_COMPILER_TARGET="armv7-none-linux-androideabi" \
                     -DCMAKE_CXX_COMPILER="$CXX" \
